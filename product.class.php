@@ -111,7 +111,8 @@ class Product {
                 INNER JOIN category c ON p.category_id = c.id
                 INNER JOIN stocks s ON p.code = s.product_code 
                 WHERE (p.code LIKE CONCAT('%', :keyword, '%') OR p.name LIKE CONCAT('%', :keyword, '%')) AND (c.id LIKE CONCAT('%', :category, '%')) 
-                ORDER BY p.name ASC;";
+                GROUP BY p.code
+                ORDER BY p.code ASC;";
 
         // Prepare the SQL statement for execution.
         $query = $this->db->connect()->prepare($sql);
